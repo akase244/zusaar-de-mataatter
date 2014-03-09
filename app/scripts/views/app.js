@@ -4,23 +4,35 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'intro',
     'templates',
     'collections/event',
     'collections/user',
     'models/user',
-    'views/user-list'
-], function ($, _, Backbone, JST, EventCollection, UserCollection, UserModel, UserListView) {
+    'views/user-list',
+    'views/search-form'
+], function ($, _, Backbone, intro, JST, EventCollection, UserCollection, UserModel, UserListView, SearchForm) {
     'use strict';
 
     var AppView = Backbone.View.extend({
         template: JST['app/scripts/templates/app.ejs'],
         eventCollection: null,
         users: [],
-        myId: 'Zusaar user_id',
+        userId: 'agxzfnp1c2Fhci1ocmRyFQsSBFVzZXIiCzkxMzk0NDMwX3R3DA', // Zusaar's user_id 
+        searchForm: null,
+
+        events: {
+            'click .howtouse': 'showIntro'
+        },
 
         initialize: function() {
+            Backbone.View.prototype.initialize.apply(this, arguments);
+            this.fetchEvent();
+        },
+
+        fetchEvent: function() {
             var params = {
-                user_id: this.myId,
+                user_id: this.userId,
                 count: 100
             };
             this.eventCollection = new EventCollection(params);
@@ -32,11 +44,21 @@ define([
         render: function() {
             this.$el.html(this.template());
 
+            var params = {
+                user_id: this.userId,
+            };
+            this.searchForm = new SearchForm(params);
+            this.searchForm.on('userIdChanged', function(userId) {
+                this.userId = userId;
+                this.fetchEvent();
+            }, this);
+            this.$el.append(this.searchForm.render().el);
+
             var users = [];
             this.eventCollection.each(function(eventModel) {
                 var eventUsers = eventModel.get('users');
                 for (var key in eventUsers) {
-                    if (eventUsers[key].user_id == this.myId) {
+                    if (eventUsers[key].user_id == this.userId) {
                         continue;
                     }
                     if (!users[eventUsers[key].user_id]) {
@@ -69,7 +91,13 @@ define([
             this.$el.append(userList.render().el);
 
             return this;
+        },
+
+        showIntro: function() {
+            intro().start();
+            return false;
         }
+
     });
 
     return AppView;

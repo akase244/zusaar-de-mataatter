@@ -17,6 +17,7 @@ define([
         className: 'user-list',
 
         initialize: function() {
+            Backbone.View.prototype.initialize.apply(this, arguments);
             this.collection.on('reset', this.reset, this);
         },
 

@@ -208,7 +208,12 @@ module.exports = function (grunt) {
                     '<%= yeoman.dist %>/styles/main.css': [
                         '.tmp/styles/{,*/}*.css',
                         '<%= yeoman.app %>/styles/{,*/}*.css'
+                    ],
+                    '<%= yeoman.dist %>/bower_components/intro.js/minified/introjs.min.css': [
+                        '.tmp/bower_components/intro.js/{,*/}*.css',
+                        '<%= yeoman.app %>/bower_components/intro.js/minified/{,*/}*.min.css'
                     ]
+
                 }
             }
         },

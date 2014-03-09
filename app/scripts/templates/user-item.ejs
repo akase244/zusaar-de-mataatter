@@ -1,7 +1,9 @@
 <td><a href="<%- profile_url %>" target="_blank"><%- name %></a></td>
 <td><%- events.length %></td>
 <td>
+<ul>
 <% for( var i in events ) { %>
-<a href="<%- events[i].event_url %>" target="_blank"><%- events[i].title %></a><br />
+<li><a href="<%- events[i].event_url %>" target="_blank"><%- events[i].title %></a></li>
 <% } %>
+</ul>
 </td>

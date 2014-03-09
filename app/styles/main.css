@@ -6,3 +6,36 @@ body {
     margin: 50px auto 0 auto;
     width: 300px;
 }
+
+.search-form {
+    margin:10px 20px;
+}
+
+.search-form input[name="user_id"] {
+    width: 700px;
+    font-size: 150%;
+}
+
+.search-form input[name="exec_btn"] {
+    width: 150px;
+    height: 30px;
+    font-size: 130%;
+}
+
+.howtouse {
+    margin:10px 20px;
+    font-size:150%;
+}
+
+.explanation {
+    margin:10px 20px;
+}
+
+.explanation img {
+    width: 800px;
+}
+
+.user-list {
+    width: 800px;
+    margin:10px 20px;
+}
