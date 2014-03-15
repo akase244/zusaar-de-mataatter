@@ -27,10 +27,10 @@ define([
 
         initialize: function() {
             Backbone.View.prototype.initialize.apply(this, arguments);
-            this.fetchEvent();
+            this.fetch();
         },
 
-        fetchEvent: function() {
+        fetch: function() {
             var params = {
                 user_id: this.userId,
                 count: 100
@@ -50,7 +50,7 @@ define([
             this.searchForm = new SearchForm(params);
             this.searchForm.on('userIdChanged', function(userId) {
                 this.userId = userId;
-                this.fetchEvent();
+                this.fetch();
             }, this);
             this.$el.append(this.searchForm.render().el);
 
